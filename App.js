@@ -34,9 +34,9 @@ export default class App extends Component {
       <Text style={styles.all}>Venue</Text> 
       <Dropdown style={styles.inputdropdown} data={data1}/>
       <Text style={styles.all}>Date</Text> 
-      <TextInput style={styles.input} onChangeText={(Date) => this.setState({Date})}/>
+      <TextInput style={styles.input} placeholder = "DD/MM/YYYY" placeholderTextColor = "grey" onChangeText={(Date) => this.setState({Date})}/>
       <Text style={styles.all}>Time</Text> 
-      <TextInput style={styles.input} onChangeText={(Time) => this.setState({Time})}/>
+      <TextInput style={styles.input} placeholder = "HH:mm" placeholderTextColor = "grey" onChangeText={(Time) => this.setState({Time})}/>
       <StatusBar style="auto" />
     </View>
   );
