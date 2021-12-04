@@ -20,6 +20,7 @@ export const EventSubmitted = (eventname, eventType, venue, date) => { return {e
 
 export const App = () => {
   const [date, setDate] = useState(new Date());
+  date.setHours(8); date.setMinutes(0); date.setSeconds(0); date.setMilliseconds(0);
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [wordInput, setWordInput] = useState("");
@@ -47,6 +48,7 @@ export const App = () => {
     setDate(currentDate);
     console.log(currentDate.toDateString());
     console.log(date);
+    console.log(date.toLocaleTimeString());
     console.log(wordInput);
   };
 
