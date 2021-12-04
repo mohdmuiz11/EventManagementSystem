@@ -10,11 +10,22 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Dropdown } from "react-native-material-dropdown-v2";
 
+export const EventSubmitted = (eventname, eventType, venue, date) => { return {eventManager: eventname, typeOfEvent: eventType, venueOfEvent: venue, dateOfEvent: date}}
+  //let {eventManager, typeOfEvent, venueOfEvent, dateOfEvent} = props;
+//      const eventManager = eventname;
+//      const typeOfEvent = ;
+//      const venueOfEvent = venueOfEvent;
+//      const dateOfEvent = dateOfEvent;
+// }
+
 export const App = () => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [wordInput, setWordInput] = useState("");
+  const [venue, setVenue] = useState("");
+  const [eventType, setEventType] = useState("");
+  const eventList = [];
 
   const eventTypeData = [
     { value: "Birthday Event" },
@@ -35,7 +46,7 @@ export const App = () => {
     setShow(Platform.OS === "ios");
     setDate(currentDate);
     console.log(currentDate.toDateString());
-    console.log(currentDate.toTimeString());
+    console.log(date);
     console.log(wordInput);
   };
 
@@ -52,6 +63,11 @@ export const App = () => {
     showMode("time");
   };
 
+  const newEvent = () => {
+    eventList.push(new EventSubmitted(wordInput, eventType, venue, date));
+    console.log(eventList);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Event Management System</Text>
@@ -64,11 +80,11 @@ export const App = () => {
       </View>
       <View style={styles.rowcontainer}>
         <Text style={styles.formlabel}>Event</Text>
-        <Dropdown style={styles.dropdowninput} data={eventTypeData} />
+        <Dropdown style={styles.dropdowninput} data={eventTypeData} value={eventType} onChangeText={(eventType) => setEventType(eventType)} />
       </View>
       <View style={styles.rowcontainer}>
         <Text style={styles.formlabel}>Venue</Text>
-        <Dropdown style={styles.dropdowninput} data={venueData} />
+        <Dropdown style={styles.dropdowninput} data={venueData} value={venue} onChangeText={(venue) => setVenue(venue)} />
       </View>
 
       <Button
@@ -76,11 +92,13 @@ export const App = () => {
         onPress={showDatepicker}
         title="Choose Date"
       />
-      <Button
+      {/* <Text style={styles.outputdatetime}>{date.toDateString()}</Text> */}
+      {/* <Button
         style={styles.button}
         onPress={showTimepicker}
         title="Choose Time"
-      />
+      /> */}
+      {/* <Text style={styles.outputdatetime}>{date.toTimeString()}</Text> */}
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -92,6 +110,11 @@ export const App = () => {
           minimumDate={new Date()}
         />
       )}
+      <Button
+        style={styles.button}
+        title="Submit Event"
+        onPress= {newEvent}
+      />
     </View>
   );
 };
