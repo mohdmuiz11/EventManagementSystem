@@ -137,7 +137,7 @@ export const App = () => {
       <Button
         style={styles.button}
         title="Submit Event"
-        onPress= {twoOptionAlertHandler,newEvent}
+        onPress= {newEvent,twoOptionAlertHandler}
       />
     </View>
   );
