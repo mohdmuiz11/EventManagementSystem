@@ -23,7 +23,6 @@ export const EventSubmitted = (eventname, eventType, venue, date) => { return {e
 // }
 
 export const App = () => {
-
   const flatlistRef = useRef();
   const [date, setDate] = useState(new Date());
   date.setHours(8); date.setMinutes(0); date.setSeconds(0); date.setMilliseconds(0);
@@ -124,11 +123,31 @@ export const App = () => {
     showMode("date");
   };
 
-  // const showTimepicker = () => {
-  //   showMode("time");
-  // };
+  const showTimepicker = () => {
+    showMode("time");
+  };
 
-  const newEvent = async() => {
+  const twoOptionAlertHandler = () => {
+    
+    Alert.alert(
+      
+      'Message',
+      'Do you want to proceed ?',
+      [
+        { text: 'Yes',
+         onPress : () => Alert.alert ('Successfully booked') },
+        {
+          text: 'No',
+          onPress: () => Alert.alert ('Cancel'),
+          style: 'cancel',
+        },
+      ],
+      { cancelable: false }
+      
+    );
+  };
+  
+  const newEvent = () => {
     let obj = new EventSubmitted(wordInput, eventType, venue, JSON.stringify(date));
     storeData(obj);
 
@@ -170,7 +189,8 @@ export const App = () => {
       /> */}
       {/* <Text style={styles.outputdatetime}>{date.toTimeString()}</Text> */}
       {show && (
-        <DateTimePicker
+       
+       <DateTimePicker
           testID="dateTimePicker"
           value={date}
           mode={mode}
@@ -183,7 +203,7 @@ export const App = () => {
       <Button
         style={styles.button}
         title="Submit Event"
-        onPress= {newEvent}
+        onPress= {newEvent,twoOptionAlertHandler}
       />
 
       <Button
