@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     margin: 35,
   },
   rowcontainer: {
-    flex: 1,
+    flex: 0.1,
     flexDirection: "row",
     justifyContent: "space-between",
   },
