@@ -8,7 +8,6 @@ Event Management System is designed to ease the work of event manager, where an 
 NAME | MATRIC NO
 ------------ | -------------
 Mohammad Mu'izzuddin | 1918855
------------- | -------------
 Nor Bedriah Binti Munadi | 1719890
 
 **Tasks**
