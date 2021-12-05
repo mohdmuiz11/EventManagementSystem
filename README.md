@@ -17,5 +17,5 @@ Muhammad Azri Bin Zulkarnain | 1814867
 NAME | TASK
 ------------ | -------------
 Bedriah | Do the text input, dropdown input for the venue and event and also little bit of styling.
-Azri | Implemented the Date picker calendar. created an object to save the details of an event to be put into array
+Azri | Implemented the Date picker calendar. created an object to save the details of an event to be put into array, variables and their state setters
 
