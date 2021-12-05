@@ -17,6 +17,6 @@ Faiq Shahmmy bin Shalizam | 1818897
 
 NAME | TASK
 ------------ | -------------
-Bedriah | Do the text input, dropdown input for the venue and event and also little bit of styling.
+Bedriah | Do the text input, dropdown input for the venue and event and styling.
 Azri | Implemented the Date picker calendar. created an object to save the details of an event to be put into array, variables and their state setters
 
