@@ -9,6 +9,7 @@ NAME | MATRIC NO
 ------------ | -------------
 Mohammad Mu'izzuddin | 1918855
 Nor Bedriah Binti Munadi | 1719890
+Muhammad Izzuddin bin Suhaili | 1818479
 
 **Tasks**
 
