@@ -1,12 +1,16 @@
-import React, { useState, Component } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   Button,
+  KeyboardAvoidingView,
   Platform,
   StyleSheet,
   Text,
   TextInput,
+  FlatList,
+  Alert
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Dropdown } from "react-native-material-dropdown-v2";
 
@@ -19,6 +23,8 @@ export const EventSubmitted = (eventname, eventType, venue, date) => { return {e
 // }
 
 export const App = () => {
+
+  const flatlistRef = useRef();
   const [date, setDate] = useState(new Date());
   date.setHours(8); date.setMinutes(0); date.setSeconds(0); date.setMilliseconds(0);
   const [mode, setMode] = useState("date");
@@ -26,7 +32,7 @@ export const App = () => {
   const [wordInput, setWordInput] = useState("");
   const [venue, setVenue] = useState("");
   const [eventType, setEventType] = useState("");
-  const eventList = [];
+  const [eventList, setEventList] = useState([]);
 
   const eventTypeData = [
     { value: "Birthday Event" },
@@ -40,7 +46,64 @@ export const App = () => {
     { value: "Mini Hall" },
     { value: "Orchid Hall" },
     { value: "Grand Hall" },
+    { value: "Main Auditorium" },
   ];
+
+  //Mohammad Mu'izzuddin bin Mohammad Ali 1918855
+  useEffect(() => {
+    getData();
+  }, []);
+
+  //get eventList from AsyncStorage
+  const getData = async () => {
+    try {
+      const getEventList = await AsyncStorage.getItem('@Event_key')
+      setEventList(getEventList != null ? JSON.parse(getEventList) : [])
+    } catch(e) {
+      console.log("Nothing to get")
+    }
+
+    console.log('Done.')
+
+  }
+  //store eventList into AsyncStorage
+  const storeData = async (obj) => {
+    try {
+      const storeEventList = [...eventList, obj];
+      // console.log(checkForDuplicates(storeEventList));
+      if (!checkForDuplicates(storeEventList)){
+        await AsyncStorage.setItem('@Event_key', JSON.stringify(storeEventList));
+        setEventList(storeEventList);
+      }
+      // setList(setEventList != null ? JSON.parse(setEventList) : null)
+    } catch (e) {
+      // saving error
+      console.log("Nothing to store")
+    }
+  }
+
+  //retrieve eventList into AsyncStorage
+  const clearAll = async () => {
+    try {
+      await AsyncStorage.clear();
+      setEventList([]);
+    } catch(e) {
+      console.log("Could not clear data")
+    }
+      console.log('Done.');
+  }
+
+  //main function to check duplication for dateOfEvent, venueOfEvent
+  const checkForDuplicates = (array) => {
+      console.log(array);
+      if (new Set(array.map(item => item.dateOfEvent)).size !== array.length) {
+        if (new Set(array.map(item => item.venueOfEvent)).size !== array.length) {
+          Alert.alert("The event is already booked!")
+          return true;
+        }
+      }
+      return false;
+  }
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -61,17 +124,22 @@ export const App = () => {
     showMode("date");
   };
 
-  const showTimepicker = () => {
-    showMode("time");
-  };
+  // const showTimepicker = () => {
+  //   showMode("time");
+  // };
 
-  const newEvent = () => {
-    eventList.push(new EventSubmitted(wordInput, eventType, venue, date));
-    console.log(eventList);
+  const newEvent = async() => {
+    let obj = new EventSubmitted(wordInput, eventType, venue, JSON.stringify(date));
+    storeData(obj);
+
+    // console.log(eventList);
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView 
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -285} //avoid moving any elements when using keyboard 
+    style={styles.container}>
       <Text style={styles.title}>Event Management System</Text>
       <View style={styles.rowcontainer}>
         <Text style={styles.formlabel}>Name</Text>
@@ -117,7 +185,27 @@ export const App = () => {
         title="Submit Event"
         onPress= {newEvent}
       />
-    </View>
+
+      <Button
+        style={styles.button}
+        title="Clear Event"
+        onPress= {clearAll}
+      />
+      {/* <Button
+        style={styles.button}
+        title="Get Data"
+        onPress= {getData}
+      /> */}
+      <View style={styles.flatlist}>
+        <FlatList
+          ref={flatlistRef}
+          data={eventList}
+          renderItem={({item}) =>
+          <Text>{item.eventManager} | {item.dateOfEvent} | {item.typeOfEvent} | {item.venueOfEvent}</Text>}
+        />
+        {/* TODO: Reformat flatlist and time format to make it look nice*/}
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 export default App;
@@ -166,4 +254,16 @@ const styles = StyleSheet.create({
     alignContent: "space-between",
     margin: 20,
   },
+  flatlist: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  item: {
+    padding: 20,
+    fontSize: 18,
+    fontWeight: "bold",
+    backgroundColor: "#e6c60d",
+    borderWidth: 2,
+  }
 });
