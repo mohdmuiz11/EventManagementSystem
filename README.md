@@ -8,9 +8,11 @@ Event Management System is designed to ease the work of event manager, where an 
 NAME | MATRIC NO
 ------------ | -------------
 Mohammad Mu'izzuddin | 1918855
+------------ | -------------
+Nor Bedriah Binti Munadi | 1719890
 
 **Tasks**
 
 NAME | TASK
 ------------ | -------------
-some name | ur task
+Bedriah | Do the text input, dropdown input for the venue and event and also little bit of styling.
