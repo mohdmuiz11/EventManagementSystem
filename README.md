@@ -11,6 +11,7 @@ Mohammad Mu'izzuddin | 1918855
 Nor Bedriah Binti Munadi | 1719890
 Muhammad Izzuddin bin Suhaili | 1818479
 Muhammad Azri Bin Zulkarnain | 1814867
+Faiq Shahmmy bin Shalizam | 1818897
 
 **Tasks**
 
