@@ -10,9 +10,12 @@ NAME | MATRIC NO
 Mohammad Mu'izzuddin | 1918855
 Nor Bedriah Binti Munadi | 1719890
 Muhammad Izzuddin bin Suhaili | 1818479
+Muhammad Azri Bin Zulkarnain | 1814867
 
 **Tasks**
 
 NAME | TASK
 ------------ | -------------
 Bedriah | Do the text input, dropdown input for the venue and event and also little bit of styling.
+Azri | Implemented the Date picker calendar. created an object to save the details of an event to be put into array
+
