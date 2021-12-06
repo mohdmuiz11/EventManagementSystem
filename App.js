@@ -8,10 +8,11 @@ import {
   Text,
   TextInput,
   FlatList,
-  Alert
+  Alert,
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from "@react-native-community/datetimepicker";
+import moment from "moment";
 import { Dropdown } from "react-native-material-dropdown-v2";
 
 export const EventSubmitted = (eventname, eventType, venue, date) => { return {eventManager: eventname, typeOfEvent: eventType, venueOfEvent: venue, dateOfEvent: date}}
@@ -104,6 +105,7 @@ export const App = () => {
           return true;
         }
       }
+      Alert.alert ('Successfully booked!');
       return false;
   }
 
@@ -138,7 +140,11 @@ export const App = () => {
       'Do you want to proceed ?',
       [
         { text: 'Yes',
-         onPress : () => Alert.alert ('Successfully booked') },
+         onPress : () => {
+          newEvent();
+          // Alert.alert ('Successfully booked')
+          }
+        },
         {
           text: 'No',
           onPress: () => Alert.alert ('Cancel'),
@@ -151,7 +157,7 @@ export const App = () => {
   };
   
   const newEvent = () => {
-    let obj = new EventSubmitted(wordInput, eventType, venue, JSON.stringify(date));
+    let obj = new EventSubmitted(wordInput, eventType, venue, date);
     storeData(obj);
 
     // console.log(eventList);
@@ -211,7 +217,7 @@ export const App = () => {
       <Button
         style={styles.button}
         title="Submit Event"
-        onPress= {newEvent,twoOptionAlertHandler}
+        onPress= {twoOptionAlertHandler}
       />
 
       <Button
@@ -229,9 +235,10 @@ export const App = () => {
           ref={flatlistRef}
           data={eventList}
           renderItem={({item}) =>
-          <Text>{item.eventManager} | {item.dateOfEvent} | {item.typeOfEvent} | {item.venueOfEvent}</Text>}
+          <Text>{item.eventManager} | {/* format using moment */}
+          {moment(item.dateOfEvent).format("Do MMM YYYY h:mm A").concat(moment(item.dateOfEvent).add(9,'h').format(" - h:mm A"))} 
+          | {item.typeOfEvent} | {item.venueOfEvent}</Text>}
         />
-        {/* TODO: Reformat flatlist and time format to make it look nice*/}
       </View>
     </KeyboardAvoidingView>
   );
