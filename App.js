@@ -16,19 +16,17 @@ import moment from "moment";
 import { Dropdown } from "react-native-material-dropdown-v2";
 
 export const EventSubmitted = (eventname, eventType, venue, date) => { return {eventManager: eventname, typeOfEvent: eventType, venueOfEvent: venue, dateOfEvent: date}}
-  //let {eventManager, typeOfEvent, venueOfEvent, dateOfEvent} = props;
-//      const eventManager = eventname;
-//      const typeOfEvent = ;
-//      const venueOfEvent = venueOfEvent;
-//      const dateOfEvent = dateOfEvent;
-// }
+// eventManager = eventname
+// eventtype = typeofevent
+// venueofevent = venue
+// dateofevent = date
 
 export const App = () => {
   const flatlistRef = useRef();
-  const [date, setDate] = useState(new Date());
-  date.setHours(8); date.setMinutes(0); date.setSeconds(0); date.setMilliseconds(0);
-  const [mode, setMode] = useState("date");
-  const [show, setShow] = useState(false);
+  const [date, setDate] = useState(new Date()); // initial state for Date and Time
+  date.setHours(8); date.setMinutes(0); date.setSeconds(0); date.setMilliseconds(0); // initializing event start time to 8:00 AM 
+  const [mode, setMode] = useState("date"); // initial DatePicker mode
+  const [show, setShow] = useState(false); // hide DatePicker by default
   const [wordInput, setWordInput] = useState("");
   const [venue, setVenue] = useState("");
   const [eventType, setEventType] = useState("");
@@ -110,28 +108,28 @@ export const App = () => {
       return false;
   }
 
+  // Muhammad Azri Bin Zulkarnain 1814867
+  // DateTimePicker handler onChange
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
-    console.log(currentDate.toDateString());
-    console.log(date);
-    console.log(date.toLocaleTimeString());
-    console.log(wordInput);
+    console.log(currentDate.toDateString()); // console output for debugging
+    console.log(date);                       // console output for debugging
+    console.log(date.toLocaleTimeString());  // console output for debugging
+    console.log(wordInput);                  // console output for debugging
   };
 
+  // DateTimePicker mode setter
   const showMode = (currentMode) => {
     setShow(true);
     setMode(currentMode);
   };
 
+  // show DateTimePicker date mode
   const showDatepicker = () => {
     showMode("date");
   };
-
-  // const showTimepicker = () => {
-  //   showMode("time");
-  // };
   
   // Muhammad Izzuddin bin Suhaili  1818479
   const twoOptionAlertHandler = () => {
@@ -221,15 +219,8 @@ export const App = () => {
         onPress={showDatepicker}
         title="Choose Date"
       />
-      {/* <Text style={styles.outputdatetime}>{date.toDateString()}</Text> */}
-      {/* <Button
-        style={styles.button}
-        onPress={showTimepicker}
-        title="Choose Time"
-      /> */}
-      {/* <Text style={styles.outputdatetime}>{date.toTimeString()}</Text> */}
+      {/* condition to show DateTimePicker */}
       {show && (
-       
        <DateTimePicker
           testID="dateTimePicker"
           value={date}
@@ -240,6 +231,7 @@ export const App = () => {
           minimumDate={new Date()}
         />
       )}
+      {/* Event submission button with confirmation prompt */}
       <Button
         style={styles.button}
         title="Submit Event"
