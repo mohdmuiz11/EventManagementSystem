@@ -128,9 +128,9 @@ export const App = () => {
     showMode("date");
   };
 
-  const showTimepicker = () => {
-    showMode("time");
-  };
+  // const showTimepicker = () => {
+  //   showMode("time");
+  // };
 
   const twoOptionAlertHandler = () => {
     
@@ -155,6 +155,29 @@ export const App = () => {
       
     );
   };
+
+  const clearConfirm = () => {
+    Alert.alert(
+      
+      'Clear event',
+      'Are you sure you want to clear all event?',
+      [
+        { text: 'Yes',
+         onPress : () => {
+          clearAll();
+          Alert.alert ('All events cleared!')
+          }
+        },
+        {
+          text: 'No',
+          // onPress: () => Alert.alert ('Cancel'),
+          style: 'cancel',
+        },
+      ],
+      { cancelable: false }
+      
+    );
+  }
   
   const newEvent = () => {
     let obj = new EventSubmitted(wordInput, eventType, venue, date);
@@ -223,7 +246,7 @@ export const App = () => {
       <Button
         style={styles.button}
         title="Clear Event"
-        onPress= {clearAll}
+        onPress= {clearConfirm}
       />
       {/* <Button
         style={styles.button}
