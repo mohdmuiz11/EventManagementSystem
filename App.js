@@ -33,6 +33,8 @@ export const App = () => {
   const [eventType, setEventType] = useState("");
   const [eventList, setEventList] = useState([]);
 
+  //Nor Bedriah Binti Munadi 1719890
+  //Declare the event data type for dropdown input in "Event" at the UI
   const eventTypeData = [
     { value: "Birthday Event" },
     { value: "Engagement Event" },
@@ -41,6 +43,7 @@ export const App = () => {
     { value: "Other" },
   ];
 
+  //Declare the venue data type for dropdown input in "Venue" at the UI
   const venueData = [
     { value: "Mini Hall" },
     { value: "Orchid Hall" },
@@ -159,7 +162,11 @@ export const App = () => {
     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -285} //avoid moving any elements when using keyboard 
     style={styles.container}>
+      
+      {/* This part is the Heading text for the system to look nice and refer to "title" stylesheet to see all the details */}
       <Text style={styles.title}>Event Management System</Text>
+
+      {/* The part below are all for text input and dropdown input for users to key in data before submit their information */}
       <View style={styles.rowcontainer}>
         <Text style={styles.formlabel}>Name</Text>
         <TextInput
@@ -176,6 +183,7 @@ export const App = () => {
         <Dropdown style={styles.dropdowninput} data={venueData} value={venue} onChangeText={(venue) => setVenue(venue)} />
       </View>
 
+      {/* Below is the button that function for users to pickup their desired date available for them to book event */}
       <Button
         style={styles.button}
         onPress={showDatepicker}
