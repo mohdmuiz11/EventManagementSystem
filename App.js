@@ -62,6 +62,7 @@ export const App = () => {
     try {
       const getEventList = await AsyncStorage.getItem('@Event_key')
       setEventList(getEventList != null ? JSON.parse(getEventList) : [])
+      console.log(eventList);
     } catch(e) {
       console.log("Nothing to get")
     }
@@ -73,6 +74,7 @@ export const App = () => {
   const storeData = async (obj) => {
     try {
       const storeEventList = [...eventList, obj];
+      console.log(storeEventList);
       // console.log(checkForDuplicates(storeEventList));
       if (!checkForDuplicates(storeEventList)){
         await AsyncStorage.setItem('@Event_key', JSON.stringify(storeEventList));
@@ -99,11 +101,10 @@ export const App = () => {
   //main function to check duplication for dateOfEvent, venueOfEvent
   const checkForDuplicates = (array) => {
       console.log(array);
-      if (new Set(array.map(item => item.dateOfEvent)).size !== array.length) {
-        if (new Set(array.map(item => item.venueOfEvent)).size !== array.length) {
-          Alert.alert("The event is already booked!")
+      if ((new Set(array.map(item => item.dateOfEvent)).size !== array.length)
+        && (new Set(array.map(item => item.venueOfEvent)).size !== array.length)) {
+          Alert.alert("The event is already booked!");
           return true;
-        }
       }
       Alert.alert ('Successfully booked!');
       return false;
@@ -180,7 +181,8 @@ export const App = () => {
   }
   
   const newEvent = () => {
-    let obj = new EventSubmitted(wordInput, eventType, venue, date);
+    let obj = new EventSubmitted(wordInput, eventType, venue,
+      moment(date).format("Do MMM YYYY h:mm A").concat(moment(date).add(9,'h').format(" - h:mm A")));
     storeData(obj);
 
     // console.log(eventList);
@@ -258,9 +260,7 @@ export const App = () => {
           ref={flatlistRef}
           data={eventList}
           renderItem={({item}) =>
-          <Text>{item.eventManager} | {/* format using moment */}
-          {moment(item.dateOfEvent).format("Do MMM YYYY h:mm A").concat(moment(item.dateOfEvent).add(9,'h').format(" - h:mm A"))} 
-          | {item.typeOfEvent} | {item.venueOfEvent}</Text>}
+          <Text>{item.eventManager} | {item.dateOfEvent} | {item.typeOfEvent} | {item.venueOfEvent}</Text>}
         />
       </View>
     </KeyboardAvoidingView>
