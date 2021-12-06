@@ -15,6 +15,8 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 import { Dropdown } from "react-native-material-dropdown-v2";
 
+// Muhammad Azri Bin Zulkarnain 1814867
+// EventSubmitted object to hold detail of event
 export const EventSubmitted = (eventname, eventType, venue, date) => { return {eventManager: eventname, typeOfEvent: eventType, venueOfEvent: venue, dateOfEvent: date}}
 // eventManager = eventname
 // eventtype = typeofevent
