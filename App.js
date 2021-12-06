@@ -132,7 +132,8 @@ export const App = () => {
   // const showTimepicker = () => {
   //   showMode("time");
   // };
-
+  
+  // Muhammad Izzuddin bin Suhaili  1818479
   const twoOptionAlertHandler = () => {
     
     Alert.alert(
