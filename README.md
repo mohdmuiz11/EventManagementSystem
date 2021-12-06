@@ -17,6 +17,12 @@ Faiq Shahmmy bin Shalizam | 1818897 | @faiqshahmy
 
 NAME | TASK
 ------------ | -------------
-Mu'izzuddin | Add checks for duplication, making flatlist layout for all events, and use AsyncStorage(similar to LocalStorage, but can work even app exit)
+Mu'izzuddin | Add checks for duplication, making flatlist layout for all events, and use AsyncStorage
 Bedriah | Do the text input, dropdown input for the venue and event and styling.
 Azri | Implemented the Date picker calendar. created an object to save the details of an event to be put into array, variables and their state setters
+
+### Dependencies
+- [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/usage) (alternative to LocalStorage, which can be use even app exit)
+- [DateTimePicker](https://github.com/react-native-datetimepicker/datetimepicker) (using system date & time picker for each platform)
+- [Moment](https://momentjs.com/docs/#/use-it/) (date & time formatter)
+- [Material dropdown](https://github.com/n4kz/react-native-material-dropdown) (consistent dropdown menu behaviour for iOS & Android)
